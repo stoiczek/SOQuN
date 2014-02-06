@@ -6,7 +6,7 @@ import soqun
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.md')).read()
-SCRIPT_PREFIX = 'ares_'
+SCRIPT_PREFIX = 'soqun_'
 requires = [
     'requests',              # For SA API
     'python-simple-hipchat', # For hipchat notifications
@@ -24,9 +24,10 @@ def _get_console_scripts():
             mod_name = os.path.basename(file_name)
             mod_name = mod_name[0:len(mod_name) - 3]
             scripts_string.append(SCRIPT_PREFIX + mod_name +
-                                  ' = soqun' + mod_name + ':main\n')
+                                  ' = soqun.cmd_scripts.' + mod_name + ':main\n')
     return ''.join(scripts_string)
 
+print _get_console_scripts()
 
 def _get_entry_points():
     return "[console_scripts]\n{0}".format(_get_console_scripts())
